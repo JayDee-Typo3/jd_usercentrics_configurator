@@ -1,0 +1,22 @@
+<?php
+defined('TYPO3') || die();
+
+(static function() {
+    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
+        'JdUsercentricsConfigurator',
+        'system',
+        'ucconf',
+        '',
+        [
+            \JD\JdUsercentricsConfigurator\Controller\ConfigController::class => 'list, show, new, create, edit, update, delete',
+        ],
+        [
+            'access' => 'user,group',
+            'icon'   => 'EXT:jd_usercentrics_configurator/Resources/Public/Icons/user_mod_ucconf.svg',
+            'labels' => 'LLL:EXT:jd_usercentrics_configurator/Resources/Private/Language/locallang_ucconf.xlf',
+        ]
+    );
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_jdusercentricsconfigurator_domain_model_config', 'EXT:jd_usercentrics_configurator/Resources/Private/Language/locallang_csh_tx_jdusercentricsconfigurator_domain_model_config.xlf');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_jdusercentricsconfigurator_domain_model_config');
+})();

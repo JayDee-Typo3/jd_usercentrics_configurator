@@ -1,0 +1,160 @@
+{
+    "modules": [
+        {
+            "config": {
+                "position": [
+                    159,
+                    79
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_index": false,
+                    "_default1_list": true,
+                    "_default2_show": true,
+                    "_default3_new_create": true,
+                    "_default4_edit_update": true,
+                    "_default5_delete": true,
+                    "customActions": []
+                },
+                "name": "Config",
+                "objectsettings": {
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "aggregateRoot": true,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "886074258273"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": true,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "settingsId",
+                            "propertyType": "String",
+                            "uid": "688750125060"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": true,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "activate",
+                            "propertyType": "Boolean",
+                            "uid": "901265970336"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": true,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "useFooterLink",
+                            "propertyType": "Boolean",
+                            "uid": "1610323681593"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": true,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "useGtm",
+                            "propertyType": "Boolean",
+                            "uid": "1185602962046"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": true,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "blockOnly",
+                            "propertyType": "Text",
+                            "uid": "1117972755749"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": true,
+                            "propertyIsNullable": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "blockElements",
+                            "propertyType": "Text",
+                            "uid": "1592518640625"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
+        }
+    ],
+    "properties": {
+        "backendModules": [
+            {
+                "actions": {
+                    "controllerActionCombinations": ""
+                },
+                "description": "",
+                "key": "ucconf",
+                "mainModule": "system",
+                "name": "Configurator",
+                "tabLabel": "UC Configurator"
+            }
+        ],
+        "description": "",
+        "emConf": {
+            "category": "plugin",
+            "custom_category": "",
+            "dependsOn": "typo3 => 11.5.0-11.5.99\n",
+            "disableLocalization": false,
+            "disableVersioning": false,
+            "generateDocumentationTemplate": false,
+            "generateEditorConfig": false,
+            "generateEmptyGitRepository": true,
+            "sourceLanguage": "en",
+            "state": "alpha",
+            "targetVersion": "11.5.0-11.5.99",
+            "version": "1.0.0"
+        },
+        "extensionKey": "jd_usercentrics_configurator",
+        "name": "Usercentrics Configurator",
+        "originalExtensionKey": "",
+        "originalVendorName": "",
+        "persons": [],
+        "plugins": [],
+        "vendorName": "JD"
+    },
+    "wires": [],
+    "storagePath": "\/var\/www\/html\/public\/packages\/",
+    "log": {
+        "last_modified": "2022-11-24 10:23",
+        "extension_builder_version": "v11.0.8",
+        "be_user": " (1)"
+    }
+}

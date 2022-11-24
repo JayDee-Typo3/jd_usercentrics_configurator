@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="EXT:jd_usercentrics_configurator/Resources/Private/Language/locallang.xlf" date="2022-11-24T22:23:25Z" product-name="jd_usercentrics_configurator">
+		<header/>
+		<body>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config" resname="tx_jdusercentricsconfigurator_domain_model_config">
+				<source>Config</source>
+			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.settings_id" resname="tx_jdusercentricsconfigurator_domain_model_config.settings_id">
+				<source>Settings Id</source>
+			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.activate" resname="tx_jdusercentricsconfigurator_domain_model_config.activate">
+				<source>Activate</source>
+			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" resname="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link">
+				<source>Use Footer Link</source>
+			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" resname="tx_jdusercentricsconfigurator_domain_model_config.use_gtm">
+				<source>Use Gtm</source>
+			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.block_only" resname="tx_jdusercentricsconfigurator_domain_model_config.block_only">
+				<source>Block Only</source>
+			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.block_elements" resname="tx_jdusercentricsconfigurator_domain_model_config.block_elements">
+				<source>Block Elements</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

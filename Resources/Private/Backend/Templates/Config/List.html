@@ -1,0 +1,61 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
+    data-namespace-typo3-fluid="true">
+
+<f:layout name="Default" />
+
+This template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Backend:
+        Templates:
+          Config:
+            List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="Buttons">
+    <be:moduleLayout.button.linkButton
+        icon="actions-add"
+        title="{f:translate(id: 'LLL:EXT:backend/Resources/Private/Language/locallang_layout.xlf:newRecordGeneral')}"
+        link="{f:uri.action(controller: 'Config', action: 'new')}"
+    />
+</f:section>
+
+<f:section name="Content">
+    <h1>Listing for Config</h1>
+
+    <f:flashMessages />
+
+    <table class="tx_jdusercentricsconfigurator">
+        <tr>
+            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /></th>
+            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.activate" /></th>
+            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" /></th>
+            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" /></th>
+            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.block_only" /></th>
+            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.block_elements" /></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <f:for each="{configs}" as="config">
+            <tr>
+                <td><f:link.action action="show" arguments="{config: config}">{config.settingsId}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{config: config}">{config.activate}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{config: config}">{config.useFooterLink}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{config: config}">{config.useGtm}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{config: config}">{config.blockOnly}</f:link.action></td>
+                <td><f:link.action action="show" arguments="{config: config}">{config.blockElements}</f:link.action></td>
+                <td><f:link.action action="edit" arguments="{config: config}" class="btn btn-default">Edit</f:link.action></td>
+                <td><f:link.action action="delete" arguments="{config: config}" class="btn btn-danger">Delete</f:link.action></td>
+            </tr>
+        </f:for>
+    </table>
+
+    <f:link.action action="new" class="btn btn-default">New Config</f:link.action>
+</f:section>
+</html>

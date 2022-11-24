@@ -1,0 +1,15 @@
+
+module.tx_jdusercentricsconfigurator_ucconf {
+    view {
+        # cat=module.tx_jdusercentricsconfigurator_ucconf/file; type=string; label=Path to template root (BE)
+        templateRootPath = EXT:jd_usercentrics_configurator/Resources/Private/Backend/Templates/
+        # cat=module.tx_jdusercentricsconfigurator_ucconf/file; type=string; label=Path to template partials (BE)
+        partialRootPath = EXT:jd_usercentrics_configurator/Resources/Private/Backend/Partials/
+        # cat=module.tx_jdusercentricsconfigurator_ucconf/file; type=string; label=Path to template layouts (BE)
+        layoutRootPath = EXT:jd_usercentrics_configurator/Resources/Private/Backend/Layouts/
+    }
+    persistence {
+        # cat=module.tx_jdusercentricsconfigurator_ucconf//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

@@ -1,0 +1,15 @@
+
+# Module configuration
+module.tx_jdusercentricsconfigurator_system_jdusercentricsconfiguratorucconf {
+    persistence {
+        storagePid = {$module.tx_jdusercentricsconfigurator_ucconf.persistence.storagePid}
+    }
+    view {
+        templateRootPaths.0 = EXT:jd_usercentrics_configurator/Resources/Private/Backend/Templates/
+        templateRootPaths.1 = {$module.tx_jdusercentricsconfigurator_ucconf.view.templateRootPath}
+        partialRootPaths.0 = EXT:jd_usercentrics_configurator/Resources/Private/Backend/Partials/
+        partialRootPaths.1 = {$module.tx_jdusercentricsconfigurator_ucconf.view.partialRootPath}
+        layoutRootPaths.0 = EXT:jd_usercentrics_configurator/Resources/Private/Backend/Layouts/
+        layoutRootPaths.1 = {$module.tx_jdusercentricsconfigurator_ucconf.view.layoutRootPath}
+    }
+}

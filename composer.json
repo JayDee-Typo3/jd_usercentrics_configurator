@@ -1,0 +1,45 @@
+{
+    "name": "jd/jd-usercentrics-configurator",
+    "type": "typo3-cms-extension",
+    "description": "",
+    "authors": [],
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^11.5",
+        "t3g/usercentrics": "@dev"
+    },
+    "suggest": {
+        "t3g/usercentrics": "*"
+    },
+    "require-dev": {
+        "typo3/testing-framework": "^6.9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "JD\\JdUsercentricsConfigurator\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JD\\JdUsercentricsConfigurator\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "typo3-ter/jd-usercentrics-configurator": "self.version"
+    },
+    "config": {
+        "vendor-dir": ".Build/vendor",
+        "bin-dir": ".Build/bin"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+        ]
+    },
+    "extra": {
+        "typo3/cms": {
+            "web-dir": ".Build/public",
+            "extension-key": "jd_usercentrics_configurator"
+        }
+    }
+}
