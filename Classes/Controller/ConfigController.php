@@ -144,10 +144,10 @@ class ConfigController extends ActionController
     public function updateAction(Config $config)
     {
         if(GeneralUtility::_GET('activate'))
-            $config->setActivate((bool)GeneralUtility::_GET('activate'));
+            $config->setActivate((bool)!$config->getActivate());
 
         if (GeneralUtility::_GET('footerLink'))
-            $config->setUseFooterLink((bool)GeneralUtility::_GET('footerLink'));
+            $config->setUseFooterLink((bool)!$config->getUseFooterLink());
 
         $this->configRepository->update($config);
         $this->redirect('list');
