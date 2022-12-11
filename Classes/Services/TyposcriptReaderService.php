@@ -17,6 +17,13 @@ class TyposcriptReaderService
     private static $plugins = [];
 
     /**
+     * The typoscript settings of all modules
+     *
+     * @var array
+     */
+    private static $module = [];
+
+    /**
      * Initialize this Class
      *
      * @throws InvalidConfigurationTypeException
@@ -27,11 +34,13 @@ class TyposcriptReaderService
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
         /** @var TypoScriptService $tsService */
         $tsService = GeneralUtility::makeInstance(TypoScriptService::class);
-        self::$plugins = $tsService->convertTypoScriptArrayToPlainArray(
+        $typoscript = $tsService->convertTypoScriptArrayToPlainArray(
             $configurationManager->getConfiguration(
                 ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT
             )
-        )['plugin'];
+        );
+        self::$plugins = $typoscript['plugin'];
+        self::$module = $typoscript['module'];
     }
 
     /**
@@ -73,5 +82,27 @@ class TyposcriptReaderService
 
         return [];
 
+    }
+
+    public static function getModuleTyposcript(string $module): array
+    {
+        if (empty(self::$module))
+            self::initClass();
+
+        if (isset(self::$module[$module]) && !empty(self::$module[$module]))
+            return self::$module[$module];
+
+        return [];
+    }
+
+    public static function getModuleSettings(string $module): array
+    {
+        if (empty(self::$module))
+            self::initClass();
+
+        if ($tsModule = self::getModuleTyposcript($module))
+            return $tsModule['settings'];
+
+        return [];
     }
 }

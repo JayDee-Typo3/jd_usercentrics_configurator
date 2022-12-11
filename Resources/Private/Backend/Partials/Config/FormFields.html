@@ -1,26 +1,78 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<label for="settingsId">
-	<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /> <span class="required">(required)</span>
-</label><br />
-	<f:form.textfield property="settingsId" id="settingsId" /><br />
-<label for="activate">
-	<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.activate" />
-</label><br />
-	<f:form.checkbox property="activate" id="activate" value="1" /><br />
-<label for="useFooterLink">
-	<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" />
-</label><br />
-	<f:form.checkbox property="useFooterLink" id="useFooterLink" value="1" /><br />
-<label for="useGtm">
-	<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" />
-</label><br />
-	<f:form.checkbox property="useGtm" id="useGtm" value="1" /><br />
-<label for="blockOnly">
-	<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.block_only" />
-</label><br />
-	<f:form.textarea property="blockOnly" id="blockOnly" cols="40" rows="15" /><br />
-<label for="blockElements">
-	<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.block_elements" />
-</label><br />
-	<f:form.textarea property="blockElements" id="blockElements" cols="40" rows="15" /><br />
+	<f:section name="Main">
+		<div role="tabpanel">
+			<ul class="nav nav-tabs t3js-tabs" role="tablist" id="tabs-tab" data-store-last-tab="1">
+				<li role="presentation" class="t3js-tabmenu-item">
+					<a href="#general-tab" title="" aria-controls="general-tab" role="tab" data-bs-toggle="tab" aria-selected="true" class="active">
+						<f:translate key="be.controller.action.new.general.tab.lbl" extensionName="JdUsercentricsConfigurator" />
+					</a>
+				</li>
+				<li role="presentation" class="t3js-tabmenu-item ">
+					<a href="#smart-dataprotector" title="" aria-controls="smart-dataprotector" role="tab" data-bs-toggle="tab" aria-selected="false">
+						<f:translate key="be.controller.action.new.smart.dataprotector.block.only.tab.lbl" extensionName="JdUsercentricsConfigurator" />
+					</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div role="tabpanel" class="tab-pane active" id="general-tab">
+					<div class="panel panel-tab">
+						<div class="panel-body">
+							<f:render section="GeneralTab" arguments="{_all}" />
+						</div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane" id="smart-dataprotector">
+					<div class="panel panel-tab">
+						<div class="panel-body">
+							<div class="container">
+								<f:render section="BlockOnly" arguments="{_all}" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</f:section>
+
+	<f:section name="GeneralTab">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<label for="settingsId">
+						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /> <span class="required">*</span>
+					</label>
+					<f:form.textfield property="settingsId" id="settingsId" class="form-control"/>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<label for="activate">
+						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.activate" />
+					</label>
+					<f:form.checkbox property="activate" id="activate" value="1" class="form-check-input" />
+				</div>
+				<div class="col">
+					<label for="useFooterLink">
+						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" />
+					</label>
+					<f:form.checkbox property="useFooterLink" id="useFooterLink" value="1" class="form-check-input" />
+				</div>
+				<div class="col">
+					<label for="useGtm">
+						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" />
+					</label>
+					<f:form.checkbox property="useGtm" id="useGtm" value="1" class="form-check-input" />
+				</div>
+			</div>
+		</div>
+	</f:section>
+
+	<f:section name="BlockOnly">
+		<div class="row">
+			<p>Please select the Services which has to be watched by the Smart Dataprotector.</p>
+		</div>
+		<f:render partial="Usercentrics/ServiceSelection" section="Main" arguments="{ucServiceList: ucServiceList, fieldName: 'blockOnly'}" />
+	</f:section>
 </html>

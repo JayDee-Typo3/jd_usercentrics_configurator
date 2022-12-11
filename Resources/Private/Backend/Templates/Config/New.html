@@ -5,19 +5,6 @@
 
 <f:layout name="Default" />
 
-This template displays a NEW form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Backend:
-        Templates:
-          Config:
-            New.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="Buttons">
     <be:moduleLayout.button.linkButton
         icon="actions-view-go-back"
@@ -27,14 +14,8 @@ Otherwise your changes will be overwritten the next time you save the extension 
 </f:section>
 
 <f:section name="Content">
-    <h1>New Config</h1>
-
-    <f:flashMessages />
-
-    <f:render partial="FormErrors" />
-
     <f:form action="create" name="newConfig" object="{newConfig}">
-        <f:render partial="Config/FormFields" />
+        <f:render partial="Config/FormFields" section="Main" arguments="{_all}" />
         <f:form.submit value="Create new" class="btn btn-default"/>
     </f:form>
 </f:section>

@@ -24,6 +24,27 @@
 			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.block_elements" resname="tx_jdusercentricsconfigurator_domain_model_config.block_elements">
 				<source>Block Elements</source>
 			</trans-unit>
+			<trans-unit id="be.error.not.a.rootpage.headline" resname="be.error.not.a.rootpage.headline">
+				<source><![CDATA[Not a rootpage]]></source>
+			</trans-unit>
+			<trans-unit id="be.error.not.a.rootpage.bodytext" resname="be.error.not.a.rootpage.bodytext">
+				<source><![CDATA[Please select a Rootpage to proceed]]></source>
+			</trans-unit>
+			<trans-unit id="be.controller.action.new.general.tab.lbl" resname="be.controller.action.new.general.tab.lbl">
+				<source><![CDATA[General]]></source>
+			</trans-unit>
+			<trans-unit id="be.controller.action.new.smart.dataprotector.block.only.tab.lbl" resname="be.controller.action.new.smart.dataprotector.block.only.tab.lbl">
+				<source><![CDATA[Block only]]></source>
+			</trans-unit>
+			<trans-unit id="be.controller.action.new.smart.dataprotector.tab.content.headline" resname="be.controller.action.new.smart.dataprotector.tab.content.headline">
+				<source><![CDATA[Smart Dataprotector]]></source>
+			</trans-unit>
+			<trans-unit id="be.controller.general.status.active.lvl" resname="be.controller.general.status.active.lvl">
+				<source><![CDATA[Active]]></source>
+			</trans-unit>
+			<trans-unit id="be.controller.general.status.inactive.lvl" resname="be.controller.general.status.inactive.lvl">
+				<source><![CDATA[Inactive]]></source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

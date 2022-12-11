@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace JD\JdUsercentricsConfigurator\Domain\Model;
 
 
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
 /**
  * This file is part of the "Usercentrics Configurator" Extension for TYPO3 CMS.
  *
@@ -17,7 +19,7 @@ namespace JD\JdUsercentricsConfigurator\Domain\Model;
 /**
  * Config
  */
-class Config extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Config extends AbstractEntity
 {
 
     /**
@@ -26,42 +28,42 @@ class Config extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
-    protected $settingsId = null;
+    protected $settingsId = '';
 
     /**
      * activate
      *
      * @var bool
      */
-    protected $activate = null;
+    protected $activate = FALSE;
 
     /**
      * useFooterLink
      *
      * @var bool
      */
-    protected $useFooterLink = null;
+    protected $useFooterLink = FALSE;
 
     /**
      * useGtm
      *
      * @var bool
      */
-    protected $useGtm = null;
+    protected $useGtm = FALSE;
 
     /**
      * blockOnly
      *
      * @var string
      */
-    protected $blockOnly = null;
+    protected $blockOnly = '';
 
     /**
      * blockElements
      *
      * @var string
      */
-    protected $blockElements = null;
+    protected $blockElements = '';
 
     /**
      * Returns the settingsId

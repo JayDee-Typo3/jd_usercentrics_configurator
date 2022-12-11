@@ -1,22 +1,10 @@
 <html
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
     xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
     xmlns:be="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers"
     data-namespace-typo3-fluid="true">
 
 <f:layout name="Default" />
-
-This template is responsible for creating a table of domain objects.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Backend:
-        Templates:
-          Config:
-            List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 
 <f:section name="Buttons">
     <be:moduleLayout.button.linkButton
@@ -30,32 +18,71 @@ Otherwise your changes will be overwritten the next time you save the extension 
     <h1>Listing for Config</h1>
 
     <f:flashMessages />
+    <f:if condition="{error}">
+        <f:then><f:render partial="Error/ErrorMessage" section="Main" arguments="{error: error}"/> </f:then>
+        <f:else><f:render section="MainContent" arguments="{_all}"/> </f:else>
+    </f:if>
+</f:section>
 
-    <table class="tx_jdusercentricsconfigurator">
-        <tr>
-            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /></th>
-            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.activate" /></th>
-            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" /></th>
-            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" /></th>
-            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.block_only" /></th>
-            <th><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.block_elements" /></th>
-            <th></th>
-            <th></th>
-        </tr>
-        <f:for each="{configs}" as="config">
-            <tr>
-                <td><f:link.action action="show" arguments="{config: config}">{config.settingsId}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{config: config}">{config.activate}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{config: config}">{config.useFooterLink}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{config: config}">{config.useGtm}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{config: config}">{config.blockOnly}</f:link.action></td>
-                <td><f:link.action action="show" arguments="{config: config}">{config.blockElements}</f:link.action></td>
-                <td><f:link.action action="edit" arguments="{config: config}" class="btn btn-default">Edit</f:link.action></td>
-                <td><f:link.action action="delete" arguments="{config: config}" class="btn btn-danger">Delete</f:link.action></td>
-            </tr>
-        </f:for>
-    </table>
+<f:section name="MainContent">
+    <f:if condition="{configs}">
+        <f:then><f:render section="ConfigTable" arguments="{_all}" /></f:then>
+        <f:else>
+            <f:be.infobox title="No Configuration found" state="-1">Create a usercentrics configuration.</f:be.infobox>
+        </f:else>
+    </f:if>
+    <f:link.action action="new" class="btn btn-default">
+        <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-add" data-identifier="actions-add">
+          <span class="icon-markup">
+            <svg class="icon-color"><use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-add"></use></svg>
+          </span>
+        </span>
+    </f:link.action>
+</f:section>
 
-    <f:link.action action="new" class="btn btn-default">New Config</f:link.action>
+<f:section name="ConfigTable">
+    <div class="panel panel-default">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Settings ID</th>
+                    <th>Usercentrics active</th>
+                    <th>Use Footerlink</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <f:for each="{configs}" as="config">
+                    <tr>
+                        <td>{config.settingsId}</td>
+                        <td>
+                            <f:link.action action="update" arguments="{config: config}" additionalParams="{activate: 1}">
+                                <span class="label {f:if(condition: config.activate, then: 'label-primary', else: 'label-danger')}">
+                                    <f:translate key="{f:if(condition: config.activate, then: 'be.controller.general.status.active.lvl', else: 'be.controller.general.status.inactive.lvl')}" />
+                                </span>
+                            </f:link.action>
+                        </td>
+                        <td>
+                            <f:link.action action="update" arguments="{config: config}" additionalParams="{footerLink: 1}">
+                                <span class="label {f:if(condition: config.useFooterLink, then: 'label-primary', else: 'label-danger')}">
+                                    <f:translate key="{f:if(condition: config.useFooterLink, then: 'be.controller.general.status.active.lvl', else: 'be.controller.general.status.inactive.lvl')}" />
+                                </span>
+                            </f:link.action>
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <f:link.action action="edit" arguments="{config: config.uid}" class="btn btn-default">
+                                    <core:icon identifier="actions-document-edit" />
+                                </f:link.action>
+                                <f:link.action action="delete" arguments="{config: config.uid}" class="btn btn-default">
+                                    <core:icon identifier="actions-delete" />
+                                </f:link.action>
+                            </div>
+                        </td>
+                    </tr>
+                </f:for>
+            </tbody>
+        </table>
+    </div>
 </f:section>
 </html>

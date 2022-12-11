@@ -6,14 +6,11 @@
 <be:moduleLayout>
     <f:be.pageRenderer />
 
-    <be:moduleLayout.menu identifier="ModuleMenu">
-        <be:moduleLayout.menuItem label="Overview" uri="{f:uri.action(controller: 'Config', action: 'list')}" />
-        <be:moduleLayout.menuItem label="Create new Config" uri="{f:uri.action(controller: 'Config', action: 'new')}" />
-    </be:moduleLayout.menu>
-
     <f:render section="Buttons" />
     <be:moduleLayout.button.shortcutButton displayName="Shortcut" />
 
-    <f:render section="Content" />
+    <div class="container">
+        <f:render section="Content" />
+    </div>
 </be:moduleLayout>
 </html>

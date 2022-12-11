@@ -5,6 +5,22 @@ declare(strict_types=1);
 namespace JD\JdUsercentricsConfigurator\Controller;
 
 
+use JD\JdUsercentricsConfigurator\Domain\Model\Config;
+use JD\JdUsercentricsConfigurator\Domain\Repository\ConfigRepository;
+use JD\JdUsercentricsConfigurator\Services\DeAndEncodeService;
+use JD\JdUsercentricsConfigurator\Services\ErrorService;
+use JD\JdUsercentricsConfigurator\Services\FileService;
+use JD\JdUsercentricsConfigurator\Services\PageService;
+use JD\JdUsercentricsConfigurator\Services\TyposcriptReaderService;
+use JD\JdUsercentricsConfigurator\Services\UsercentricsConfigurationService;
+use JD\JdUsercentricsConfigurator\Services\ViewService;
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Core\Site\Entity\Site;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
+use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
 /**
  * This file is part of the "Usercentrics Configurator" Extension for TYPO3 CMS.
  *
@@ -17,43 +33,56 @@ namespace JD\JdUsercentricsConfigurator\Controller;
 /**
  * ConfigController
  */
-class ConfigController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class ConfigController extends ActionController
 {
 
     /**
      * configRepository
      *
-     * @var \JD\JdUsercentricsConfigurator\Domain\Repository\ConfigRepository
+     * @var ConfigRepository
      */
     protected $configRepository = null;
 
     /**
-     * @param \JD\JdUsercentricsConfigurator\Domain\Repository\ConfigRepository $configRepository
+     * @param ConfigRepository $configRepository
      */
-    public function injectConfigRepository(\JD\JdUsercentricsConfigurator\Domain\Repository\ConfigRepository $configRepository)
+    public function injectConfigRepository(ConfigRepository $configRepository)
     {
         $this->configRepository = $configRepository;
+    }
+
+    protected function initializeView(ViewInterface $view)
+    {
+        parent::initializeView($view);
+        ViewService::extendViewByBackendPaths($view);
     }
 
     /**
      * action list
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function listAction(): \Psr\Http\Message\ResponseInterface
+    public function listAction(): ResponseInterface
     {
+        if (!$this->request->getAttribute('site') instanceof Site)
+            $this->view->assign('error', ErrorService::addNotARootpageError());
+        else if (!PageService::isSelectedPageRootPage($this->request->getAttribute('site'), $this->request->getQueryParams()))
+            $this->view->assign('error', ErrorService::addNotARootpageError());
+
         $configs = $this->configRepository->findAll();
-        $this->view->assign('configs', $configs);
+        $this->view->assignMultiple([
+            'configs' => $configs
+        ]);
         return $this->htmlResponse();
     }
 
     /**
      * action show
      *
-     * @param \JD\JdUsercentricsConfigurator\Domain\Model\Config $config
-     * @return \Psr\Http\Message\ResponseInterface
+     * @param Config $config
+     * @return ResponseInterface
      */
-    public function showAction(\JD\JdUsercentricsConfigurator\Domain\Model\Config $config): \Psr\Http\Message\ResponseInterface
+    public function showAction(Config $config): ResponseInterface
     {
         $this->view->assign('config', $config);
         return $this->htmlResponse();
@@ -62,33 +91,46 @@ class ConfigController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * action new
      *
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function newAction(): \Psr\Http\Message\ResponseInterface
+    public function newAction(): ResponseInterface
     {
+        $this->view->assignMultiple([
+            'rootPageId' => $this->request->getAttribute('site')->getRootpageId(),
+            'ucServiceList' => DeAndEncodeService::decodeJsonString(
+                FileService::getFileContent(
+                    TyposcriptReaderService::getModuleSettings('tx_usercentrics_configurator')['serviceDataJson']
+                )
+            )
+        ]);
         return $this->htmlResponse();
     }
 
     /**
      * action create
      *
-     * @param \JD\JdUsercentricsConfigurator\Domain\Model\Config $newConfig
+     * @param Config $newConfig
      */
-    public function createAction(\JD\JdUsercentricsConfigurator\Domain\Model\Config $newConfig)
+    public function createAction(Config $newConfig)
     {
-        $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        $this->configRepository->add($newConfig);
+        $this->configRepository->add(
+            UsercentricsConfigurationService::addConfiguration(
+                $newConfig,
+                GeneralUtility::_POST(),
+                $this->request->getAttribute('site')->getRootpageId()
+            )
+        );
         $this->redirect('list');
     }
 
     /**
      * action edit
      *
-     * @param \JD\JdUsercentricsConfigurator\Domain\Model\Config $config
+     * @param Config $config
      * @TYPO3\CMS\Extbase\Annotation\IgnoreValidation("config")
-     * @return \Psr\Http\Message\ResponseInterface
+     * @return ResponseInterface
      */
-    public function editAction(\JD\JdUsercentricsConfigurator\Domain\Model\Config $config): \Psr\Http\Message\ResponseInterface
+    public function editAction(Config $config): ResponseInterface
     {
         $this->view->assign('config', $config);
         return $this->htmlResponse();
@@ -97,11 +139,16 @@ class ConfigController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * action update
      *
-     * @param \JD\JdUsercentricsConfigurator\Domain\Model\Config $config
+     * @param Config $config
      */
-    public function updateAction(\JD\JdUsercentricsConfigurator\Domain\Model\Config $config)
+    public function updateAction(Config $config)
     {
-        $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
+        if(GeneralUtility::_GET('activate'))
+            $config->setActivate((bool)GeneralUtility::_GET('activate'));
+
+        if (GeneralUtility::_GET('footerLink'))
+            $config->setUseFooterLink((bool)GeneralUtility::_GET('footerLink'));
+
         $this->configRepository->update($config);
         $this->redirect('list');
     }
@@ -109,11 +156,10 @@ class ConfigController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * action delete
      *
-     * @param \JD\JdUsercentricsConfigurator\Domain\Model\Config $config
+     * @param Config $config
      */
-    public function deleteAction(\JD\JdUsercentricsConfigurator\Domain\Model\Config $config)
+    public function deleteAction(Config $config)
     {
-        $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/p/friendsoftypo3/extension-builder/master/en-us/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
         $this->configRepository->remove($config);
         $this->redirect('list');
     }

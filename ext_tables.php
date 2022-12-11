@@ -14,9 +14,13 @@ defined('TYPO3') || die();
             'access' => 'user,group',
             'icon'   => 'EXT:jd_usercentrics_configurator/Resources/Public/Icons/user_mod_ucconf.svg',
             'labels' => 'LLL:EXT:jd_usercentrics_configurator/Resources/Private/Language/locallang_ucconf.xlf',
+            'navigationComponentId' => 'TYPO3/CMS/Backend/PageTree/PageTreeElement',
+            'inheritNavigationComponentFromMainModule' => FALSE,
         ]
     );
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_jdusercentricsconfigurator_domain_model_config', 'EXT:jd_usercentrics_configurator/Resources/Private/Language/locallang_csh_tx_jdusercentricsconfigurator_domain_model_config.xlf');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_jdusercentricsconfigurator_domain_model_config');
+
+    $GLOBALS['TBE_STYLES']['skins']['jd_usercentrics_configurator']['stylesheetDirectories'] = ['EXT:jd_usercentrics_configurator/Resources/Public/Backend/StyleSheet/'];
 })();

@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+  <f:section name="Main">
+    <div class="row row-cols-3">
+      <f:for each="{ucServiceList}" iteration="i" as="service" key="serviceId">
+        <div class="col padding padding-10">
+          <div class="form-check form-check-inline form-switch">
+            <input class="form-check-input" name="{fieldName}[]" type="checkbox" value="{serviceId}" id="{serviceId}" />
+            <label for="{serviceId}" class="form-check-label"><strong>{service}</strong></label>
+          </div>
+        </div>
+      </f:for>
+    </div>
+  </f:section>
+</html>
