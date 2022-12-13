@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace JD\JdUsercentricsConfigurator\Domain\Repository;
 
+use Doctrine\DBAL\DBALException;
+use Doctrine\DBAL\Driver\Exception;
 use PDO;
 use JD\JdUsercentricsConfigurator\Services\Typo3DbQueryParseService;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
 
 /**
  * This file is part of the "Usercentrics Configurator" Extension for TYPO3 CMS.
@@ -21,10 +24,20 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  */
 
 /**
- * The repository for Configs
+ * Class ConfigRepository
+ * @package JD\JdUsercentricsConfigurator\Domain\Repository
+ * @author Johannes Delesky, Developer
  */
-class ConfigRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class ConfigRepository extends Repository
 {
+    /**
+     * @param int $rootPageId
+     *
+     * @return array|false
+     *
+     * @throws DBALException
+     * @throws Exception
+     */
     public function getActiveConfigurationByRootPageId(int $rootPageId)
     {
         /** @var QueryBuilder $queryBuilder */
@@ -36,6 +49,11 @@ class ConfigRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         return $queryBuilder->execute()->fetchAssociative();
     }
 
+    /**
+     * Converts the QueryInterface to a QueryBuilder and returns it.
+     *
+     * @return QueryBuilder
+     */
     private function getQueryBuilder(): QueryBuilder
     {
         return Typo3DbQueryParseService::parseTypo3DbQueryToDoctrine(
@@ -43,7 +61,16 @@ class ConfigRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         );
     }
 
-    private function overwriteTypo3QuerySettings(QueryInterface $query, bool $ignoreEnableFields, bool $respectStoragePage)
+    /**
+     * Override the query settings of the QueryInterface.
+     *
+     * @param QueryInterface $query
+     * @param bool $ignoreEnableFields
+     * @param bool $respectStoragePage
+     *
+     * @return QueryInterface
+     */
+    private function overwriteTypo3QuerySettings(QueryInterface $query, bool $ignoreEnableFields, bool $respectStoragePage): QueryInterface
     {
         $settings = $query->getQuerySettings();
         $settings->setIgnoreEnableFields($ignoreEnableFields);

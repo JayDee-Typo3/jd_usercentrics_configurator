@@ -3,6 +3,11 @@ namespace JD\JdUsercentricsConfigurator\Services;
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class FileService
+ * @package JD\JdUsercentricsConfigurator\Services
+ * @author Johannes Delesky, Developer
+ */
 class FileService
 {
 

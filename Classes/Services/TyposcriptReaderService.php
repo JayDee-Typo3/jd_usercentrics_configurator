@@ -7,6 +7,11 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 
+/**
+ * Class TyposcriptReaderService
+ * @package JD\JdUsercentricsConfigurator\Services
+ * @author Johannes Delesky, Developer
+ */
 class TyposcriptReaderService
 {
     /**

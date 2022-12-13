@@ -65,6 +65,12 @@
 					</label>
 					<f:form.checkbox property="useGtm" id="useGtm" value="1" class="form-check-input" />
 				</div>
+				<div class="col">
+					<label for="gtmId">
+						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.gtm_id" />
+					</label>
+					<f:form.textfield property="gtmId" id="gtmId" class="form-control" />
+				</div>
 			</div>
 		</div>
 	</f:section>
@@ -73,6 +79,9 @@
 		<div class="row">
 			<p>Please select the Services which has to be watched by the Smart Dataprotector.</p>
 		</div>
-		<f:render partial="Usercentrics/ServiceSelection" section="Main" arguments="{ucServiceList: ucServiceList, fieldName: 'blockOnly'}" />
+		<f:variable name="conf" value="{f:if(condition: newConfig, then: newConfig, else: config)}" />
+		<f:render partial="Usercentrics/ServiceSelection"
+							section="Main"
+							arguments="{ucServiceList: ucServiceList, fieldName: 'blockOnly', config: conf}" />
 	</f:section>
 </html>

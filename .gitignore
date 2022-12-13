@@ -1,3 +1,4 @@
 .Build/
 .idea/
+.DS_Store
 composer.lock

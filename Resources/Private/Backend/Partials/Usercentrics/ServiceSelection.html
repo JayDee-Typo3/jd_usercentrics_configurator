@@ -1,10 +1,26 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:jd="http://typo3.org/ns/JD/JdUsercentricsConfigurator\ViewHelper"
+      data-namespace-typo3-fluid="true">
   <f:section name="Main">
     <div class="row row-cols-3">
       <f:for each="{ucServiceList}" iteration="i" as="service" key="serviceId">
         <div class="col padding padding-10">
           <div class="form-check form-check-inline form-switch">
-            <input class="form-check-input" name="{fieldName}[]" type="checkbox" value="{serviceId}" id="{serviceId}" />
+            <f:if condition="{jd:backend.isServiceSelected(selectedServices: config.blockOnly, crServiceId: serviceId)}">
+              <f:then>
+                <input class="form-check-input"
+                       name="{fieldName}[]"
+                       type="checkbox" value="{serviceId}" id="{serviceId}"
+                       checked="checked"
+                />
+              </f:then>
+              <f:else>
+                <input class="form-check-input"
+                       name="{fieldName}[]"
+                       type="checkbox" value="{serviceId}" id="{serviceId}"
+                />
+              </f:else>
+            </f:if>
             <label for="{serviceId}" class="form-check-label"><strong>{service}</strong></label>
           </div>
         </div>

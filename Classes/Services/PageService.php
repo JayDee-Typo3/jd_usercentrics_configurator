@@ -6,6 +6,11 @@ namespace JD\JdUsercentricsConfigurator\Services;
 
 use TYPO3\CMS\Core\Site\Entity\Site;
 
+/**
+ * Class PageService
+ * @package JD\JdUsercentricsConfigurator\Services
+ * @author Johannes Delesky, Developer
+ */
 class PageService
 {
 

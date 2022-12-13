@@ -20,7 +20,7 @@ return [
         'iconfile' => 'EXT:jd_usercentrics_configurator/Resources/Public/Icons/tx_jdusercentricsconfigurator_domain_model_config.gif'
     ],
     'types' => [
-        '1' => ['showitem' => 'settings_id, activate, use_footer_link, use_gtm, block_only, block_elements, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
+        '1' => ['showitem' => 'settings_id, activate, use_footer_link, use_gtm, gtm_id, block_only, block_elements, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language, sys_language_uid, l10n_parent, l10n_diffsource, --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access, hidden, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -151,6 +151,17 @@ return [
                     ]
                 ],
                 'default' => 0,
+            ]
+        ],
+        'gtm_id' => [
+            'exclude' => true,
+            'l10n_mode' => 'exclude',
+            'label' => 'GTM ID',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim',
+                'default' => ''
             ]
         ],
         'block_only' => [

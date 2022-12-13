@@ -29,15 +29,15 @@
         <f:then><f:render section="ConfigTable" arguments="{_all}" /></f:then>
         <f:else>
             <f:be.infobox title="No Configuration found" state="-1">Create a usercentrics configuration.</f:be.infobox>
+            <f:link.action action="new" class="btn btn-default">
+                <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-add" data-identifier="actions-add">
+                  <span class="icon-markup">
+                    <svg class="icon-color"><use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-add"></use></svg>
+                  </span>
+                </span>
+            </f:link.action>
         </f:else>
     </f:if>
-    <f:link.action action="new" class="btn btn-default">
-        <span class="t3js-icon icon icon-size-small icon-state-default icon-actions-add" data-identifier="actions-add">
-          <span class="icon-markup">
-            <svg class="icon-color"><use xlink:href="/typo3/sysext/core/Resources/Public/Icons/T3Icons/sprites/actions.svg#actions-add"></use></svg>
-          </span>
-        </span>
-    </f:link.action>
 </f:section>
 
 <f:section name="ConfigTable">
@@ -48,6 +48,7 @@
                     <th>Settings ID</th>
                     <th>Usercentrics active</th>
                     <th>Use Footerlink</th>
+                    <th>Use Google Tag Manager</th>
                     <th></th>
                 </tr>
             </thead>
@@ -66,6 +67,13 @@
                             <f:link.action action="update" arguments="{config: config}" additionalParams="{footerLink: 1}">
                                 <span class="label {f:if(condition: config.useFooterLink, then: 'label-primary', else: 'label-danger')}">
                                     <f:translate key="{f:if(condition: config.useFooterLink, then: 'be.controller.general.status.active.lvl', else: 'be.controller.general.status.inactive.lvl')}" />
+                                </span>
+                            </f:link.action>
+                        </td>
+                        <td>
+                            <f:link.action action="update" arguments="{config: config}" additionalParams="{useGtm: 1}">
+                                <span class="label {f:if(condition: config.useGtm, then: 'label-primary', else: 'label-danger')}">
+                                    <f:translate key="{f:if(condition: config.useGtm, then: 'be.controller.general.status.active.lvl', else: 'be.controller.general.status.inactive.lvl')}" />
                                 </span>
                             </f:link.action>
                         </td>

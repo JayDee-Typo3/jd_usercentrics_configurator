@@ -18,6 +18,9 @@
 			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" resname="tx_jdusercentricsconfigurator_domain_model_config.use_gtm">
 				<source>Use Gtm</source>
 			</trans-unit>
+			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.gtm_id" resname="tx_jdusercentricsconfigurator_domain_model_config.gtm_id">
+				<source>Google Tag Manager ID</source>
+			</trans-unit>
 			<trans-unit id="tx_jdusercentricsconfigurator_domain_model_config.block_only" resname="tx_jdusercentricsconfigurator_domain_model_config.block_only">
 				<source>Block Only</source>
 			</trans-unit>

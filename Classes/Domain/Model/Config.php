@@ -17,7 +17,9 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  */
 
 /**
- * Config
+ * Class Config
+ * @package JD\JdUsercentricsConfigurator\Domain\Model
+ * @author Johannes Delesky, Developer
  */
 class Config extends AbstractEntity
 {
@@ -50,6 +52,11 @@ class Config extends AbstractEntity
      * @var bool
      */
     protected $useGtm = FALSE;
+
+    /**
+     * @var string $gtmId
+     */
+    protected $gtmId = '';
 
     /**
      * blockOnly
@@ -156,6 +163,22 @@ class Config extends AbstractEntity
     public function getUseGtm()
     {
         return $this->useGtm;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGtmId(): string
+    {
+        return $this->gtmId;
+    }
+
+    /**
+     * @param string $gtmId
+     */
+    public function setGtmId(string $gtmId): void
+    {
+        $this->gtmId = $gtmId;
     }
 
     /**

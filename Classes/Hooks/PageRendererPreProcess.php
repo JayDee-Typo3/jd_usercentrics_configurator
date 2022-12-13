@@ -9,13 +9,18 @@ use TYPO3\CMS\Core\Http\Request;
 use TYPO3\CMS\Core\Page\AssetCollector;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class PageRendererPreProcess
+ * @package JD\JdUsercentricsConfigurator\Hooks
+ * @author Johannes Delesky, Developer
+ */
 class PageRendererPreProcess extends T3GPageRendererPreProcess
 {
 
     /**
      * @var AssetCollector
      */
-    private $assetCollector;
+    private AssetCollector $assetCollector;
 
     /**
      * @var Request $request
@@ -27,6 +32,10 @@ class PageRendererPreProcess extends T3GPageRendererPreProcess
      */
     private $ucConfig = NULL;
 
+    /**
+     * PageRendererPreProcess constructor.
+     * @param AssetCollector|null $assetCollector
+     */
     public function __construct(AssetCollector $assetCollector = null)
     {
         $this->assetCollector = $assetCollector ?? GeneralUtility::makeInstance(AssetCollector::class);
@@ -36,6 +45,11 @@ class PageRendererPreProcess extends T3GPageRendererPreProcess
         );
     }
 
+    /**
+     * Add JavaScript and Library to page.
+     *
+     * @return void
+     */
     public function addLibrary(): void
     {
         if(!empty($this->ucConfig) && $this->ucConfig['activate']) {
@@ -45,12 +59,20 @@ class PageRendererPreProcess extends T3GPageRendererPreProcess
 
             $this->addUsercentricsCMP2Script();
             $this->addSmartDataProtector();
+            if ($this->ucConfig['useGtm'] && $this->ucConfig['gtmId'])
+                $this->addGoogleTagManagerScript();
+
             $this->addConfiguredJsFiles($config['jsFiles.'] ?? []);
             $this->addConfiguredInlineJavaScript($config['jsInline.'] ?? []);
         }
     }
 
-    protected function addUsercentricsCMP2Script()
+    /**
+     * Add Usercentrics Library
+     *
+     * @return void
+     */
+    protected function addUsercentricsCMP2Script(): void
     {
         $this->assetCollector->addJavaScript(
             'usercentricsCMP2',
@@ -63,7 +85,12 @@ class PageRendererPreProcess extends T3GPageRendererPreProcess
         );
     }
 
-    protected function addSmartDataProtector()
+    /**
+     * Add Smart DataProtector
+     *
+     * @return void
+     */
+    protected function addSmartDataProtector(): void
     {
         $this->assetCollector->addJavaScript(
             'smartDataProtector',
@@ -79,5 +106,26 @@ class PageRendererPreProcess extends T3GPageRendererPreProcess
                     'type' => 'text/javascript'
                 ]
             );
+    }
+
+    /**
+     * Add Google Tag Manager
+     *
+     * @return void
+     */
+    protected function addGoogleTagManagerScript(): void
+    {
+        $this->assetCollector->addInlineJavaScript(
+            'gtmIntegration',
+            "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                    })(window,document,'script','dataLayer','" . $this->ucConfig['gtmId'] . "');",
+            [
+                'type' => 'text/plain',
+                'data-usercentrics' => 'Google Tag Manager'
+            ]
+        );
     }
 }

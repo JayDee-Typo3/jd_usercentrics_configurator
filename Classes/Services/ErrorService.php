@@ -6,6 +6,11 @@ namespace JD\JdUsercentricsConfigurator\Services;
 
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
+/**
+ * Class ErrorService
+ * @package JD\JdUsercentricsConfigurator\Services
+ * @author Johannes Delesky, Developer
+ */
 class ErrorService
 {
 

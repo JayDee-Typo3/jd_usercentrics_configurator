@@ -19,7 +19,6 @@ use TYPO3\CMS\Core\Site\Entity\Site;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
 /**
  * This file is part of the "Usercentrics Configurator" Extension for TYPO3 CMS.
@@ -31,7 +30,9 @@ use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
  */
 
 /**
- * ConfigController
+ * Class ConfigController
+ * @package JD\JdUsercentricsConfigurator\Controller
+ * @author Johannes Delesky, Developer
  */
 class ConfigController extends ActionController
 {
@@ -51,6 +52,11 @@ class ConfigController extends ActionController
         $this->configRepository = $configRepository;
     }
 
+    /**
+     * Initialize the backend view.
+     *
+     * @param ViewInterface $view
+     */
     protected function initializeView(ViewInterface $view)
     {
         parent::initializeView($view);
@@ -132,7 +138,14 @@ class ConfigController extends ActionController
      */
     public function editAction(Config $config): ResponseInterface
     {
-        $this->view->assign('config', $config);
+        $this->view->assignMultiple([
+            'config' => $config,
+            'ucServiceList' => DeAndEncodeService::decodeJsonString(
+                FileService::getFileContent(
+                    TyposcriptReaderService::getModuleSettings('tx_usercentrics_configurator')['serviceDataJson']
+                )
+            )
+        ]);
         return $this->htmlResponse();
     }
 
@@ -148,6 +161,9 @@ class ConfigController extends ActionController
 
         if (GeneralUtility::_GET('footerLink'))
             $config->setUseFooterLink((bool)!$config->getUseFooterLink());
+
+        if (GeneralUtility::_GET('useGtm'))
+            $config->setUseGtm((bool)!$config->getUseGtm());
 
         $this->configRepository->update($config);
         $this->redirect('list');

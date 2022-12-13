@@ -8,6 +8,11 @@ use JD\JdUsercentricsConfigurator\Domain\Model\Config;
 use JD\JdUsercentricsConfigurator\Domain\Repository\ConfigRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class UsercentricsConfigurationService
+ * @package JD\JdUsercentricsConfigurator\Services
+ * @author Johannes Delesky, Developer
+ */
 class UsercentricsConfigurationService
 {
 
