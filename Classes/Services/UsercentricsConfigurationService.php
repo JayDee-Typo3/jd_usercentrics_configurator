@@ -15,7 +15,12 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class UsercentricsConfigurationService
 {
-
+    /**
+     * @param Config $config
+     * @param array $data
+     * @param int $rootPageId
+     * @return Config
+     */
     public static function addConfiguration(Config $config, array $data, int $rootPageId): Config
     {
         if (empty($data))
@@ -30,6 +35,12 @@ class UsercentricsConfigurationService
         return $config;
     }
 
+    /**
+     * @param int $rootPageId
+     * @return array
+     * @throws \Doctrine\DBAL\DBALException
+     * @throws \Doctrine\DBAL\Driver\Exception
+     */
     public static function getUsercentricsConfigForRootPage(int $rootPageId): array
     {
         /** @var ConfigRepository $repository */

@@ -9,6 +9,7 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
  * Class ViewService
+ *
  * @package JD\JdUsercentricsConfigurator\Services
  * @author Johannes Delesky, Developer
  */

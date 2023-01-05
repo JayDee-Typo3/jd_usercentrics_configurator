@@ -9,6 +9,7 @@ use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
 
 /**
  * Class TyposcriptReaderService
+ *
  * @package JD\JdUsercentricsConfigurator\Services
  * @author Johannes Delesky, Developer
  */
@@ -33,7 +34,7 @@ class TyposcriptReaderService
      *
      * @throws InvalidConfigurationTypeException
      */
-    public static function initClass()
+    public static function initClass(): void
     {
         /** @var ConfigurationManager $configurationManager */
         $configurationManager = GeneralUtility::makeInstance(ConfigurationManager::class);
@@ -89,6 +90,11 @@ class TyposcriptReaderService
 
     }
 
+    /**
+     * @param string $module
+     * @return array
+     * @throws InvalidConfigurationTypeException
+     */
     public static function getModuleTyposcript(string $module): array
     {
         if (empty(self::$module))
@@ -100,6 +106,11 @@ class TyposcriptReaderService
         return [];
     }
 
+    /**
+     * @param string $module
+     * @return array
+     * @throws InvalidConfigurationTypeException
+     */
     public static function getModuleSettings(string $module): array
     {
         if (empty(self::$module))

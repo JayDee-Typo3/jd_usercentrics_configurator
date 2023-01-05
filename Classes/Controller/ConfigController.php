@@ -31,6 +31,7 @@ use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 
 /**
  * Class ConfigController
+ *
  * @package JD\JdUsercentricsConfigurator\Controller
  * @author Johannes Delesky, Developer
  */

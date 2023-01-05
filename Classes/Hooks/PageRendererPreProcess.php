@@ -11,6 +11,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class PageRendererPreProcess
+ *
  * @package JD\JdUsercentricsConfigurator\Hooks
  * @author Johannes Delesky, Developer
  */
@@ -59,7 +60,7 @@ class PageRendererPreProcess extends T3GPageRendererPreProcess
 
             $this->addUsercentricsCMP2Script();
             $this->addSmartDataProtector();
-            if ($this->ucConfig['useGtm'] && $this->ucConfig['gtmId'])
+            if ($this->ucConfig['use_gtm'] && $this->ucConfig['gtm_id'])
                 $this->addGoogleTagManagerScript();
 
             $this->addConfiguredJsFiles($config['jsFiles.'] ?? []);

@@ -3,6 +3,7 @@ namespace JD\JdUsercentricsConfigurator\Services;
 
 /**
  * Class DeAndEncodeService
+ *
  * @package JD\JdUsercentricsConfigurator\Services
  * @author Johannes Delesky, Developer
  */
