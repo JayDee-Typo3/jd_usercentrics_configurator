@@ -10,6 +10,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class UsercentricsConfigurationService
+ *
  * @package JD\JdUsercentricsConfigurator\Services
  * @author Johannes Delesky, Developer
  */

@@ -5,7 +5,14 @@ namespace JD\JdUsercentricsConfigurator\Services;
 
 
 use DOMDocument;
+use DOMElement;
 
+/**
+ * Class HTMLParseService
+ *
+ * @package JD\JdUsercentricsConfigurator\Services
+ * @author Johannes Delesky, Developer
+ */
 class HTMLParseService
 {
     /**
@@ -36,17 +43,38 @@ class HTMLParseService
         return $html;
     }
 
+    /**
+     * Change the iframe html string to get a usercentrics conform iframe integration.
+     *
+     * @param string $html
+     * @param string $ucService
+     *
+     * @return string
+     */
     private static function parseIframeForUsercentrics(string $html, string $ucService): string
     {
         $dom = new DOMDocument();
         $dom->loadHTML($html);
-        /** @var \DOMElement $iframe */
-        $iframe = $dom->getElementsByTagName('iframe')->item(0);
-        $src = $iframe->getAttribute('src');
-        return str_replace(
-            'src="' . $src . '"',
-            'uc-src="' . $src . '" data-usercentrics="' . $ucService . '"',
-            $html
-        );
+        /** @var DOMElement $iframe */
+        if ($iframe = $dom->getElementsByTagName('iframe')->item(0)) {
+            $replaceStr = '';
+
+            if ($src = $iframe->getAttribute('src')) {
+                $replaceStr = 'uc-src="' . $src . '" ';
+                $dataUc = $iframe->getAttribute('data-usercentrics');
+                if (empty($dataUc))
+                    $replaceStr .= 'data-usercentrics="' . $ucService . '"';
+            }
+            if (empty($replaceStr))
+                return $html;
+
+            return str_replace(
+                'src="' . $src . '"',
+                $replaceStr,
+                $html
+            );
+        }
+
+        return $html;
     }
 }

@@ -11,6 +11,12 @@ use JD\JdUsercentricsConfigurator\Services\UsercentricsConfigurationService;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\Rendering\VimeoRenderer;
 
+/**
+ * Class JdVimeoRenderer
+ *
+ * @package JD\JdUsercentricsConfigurator\Resource\Rendering
+ * @author Johannes Delesky, Developer
+ */
 class JdVimeoRenderer extends VimeoRenderer
 {
     /**
