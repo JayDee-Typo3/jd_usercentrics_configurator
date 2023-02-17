@@ -36,15 +36,16 @@
 
 	<f:section name="GeneralTab">
 		<div class="container">
-			<div class="row">
-				<fieldset class="form-section">
-					<div class="form-group t3js-formengine-palette-field t3js-formengine-validation-marker">
-						<label for="settingsId">
-							<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /> <span class="required">*</span>
-						</label>
+			<div class="row justify-content-evenly">
+				<div class="card col-11">
+					<div class="card-body">
+						<h3 class="card-title"><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /> <span class="required">*</span></h3>
+						<p>Enter here the usercentrics ID for this Domain.</p>
+					</div>
+					<div class="card-footer">
 						<f:form.textfield property="settingsId" id="settingsId" class="form-control"/>
 					</div>
-				</fieldset>
+				</div>
 			</div>
 			<div class="row"><div class="w-100">&nbsp;</div></div>
 			<div class="row justify-content-evenly">
