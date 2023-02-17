@@ -12,7 +12,7 @@ defined('TYPO3') || die();
         ],
         [
             'access' => 'user,group',
-            'icon'   => 'EXT:jd_usercentrics_configurator/Resources/Public/Icons/user_mod_ucconf.svg',
+            'icon'   => 'EXT:jd_usercentrics_configurator/Resources/Public/Icons/usercentrics.png',
             'labels' => 'LLL:EXT:jd_usercentrics_configurator/Resources/Private/Language/locallang_ucconf.xlf',
             'navigationComponentId' => 'TYPO3/CMS/Backend/PageTree/PageTreeElement',
             'inheritNavigationComponentFromMainModule' => FALSE,
