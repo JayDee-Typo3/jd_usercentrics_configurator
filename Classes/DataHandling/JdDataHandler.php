@@ -26,7 +26,8 @@ class JdDataHandler extends DataHandler
      */
     public function insertDB($table, $id, $fieldArray, $newVersion = false, $suggestedUid = 0, $dontSetNewIdIndex = false)
     {
-        $this->changeHtmlBodyText($fieldArray, $fieldArray['CType'], $fieldArray['pid']);
+        if (!empty($fieldArray['CType']) && !empty($fieldArray['pid']))
+            $this->changeHtmlBodyText($fieldArray, $fieldArray['CType'], $fieldArray['pid']);
 
         parent::insertDB($table, $id, $fieldArray, $newVersion, $suggestedUid, $dontSetNewIdIndex);
     }
@@ -41,7 +42,8 @@ class JdDataHandler extends DataHandler
             ['uid' => ['func' => 'eq', 'value' => $id]]
         );
 
-        $this->changeHtmlBodyText($fieldArray, $contentElement['CType'], $contentElement['pid']);
+        if (!empty($contentElement['CType']) && !empty($contentElement['pid']))
+            $this->changeHtmlBodyText($fieldArray, $contentElement['CType'], $contentElement['pid']);
 
         parent::updateDB($table, $id, $fieldArray);
     }

@@ -57,8 +57,12 @@ class DatabaseOperationService
             self::$queryBuilder->andWhere(...$where);
         }
 
+        $dataset = self::$queryBuilder->execute()->fetchAssociative();
 
-        return self::$queryBuilder->execute()->fetchAssociative();
+        if ($dataset === FALSE)
+            return [];
+
+        return $dataset;
     }
 
     /**
