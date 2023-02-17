@@ -166,7 +166,13 @@ class ConfigController extends ActionController
         if (GeneralUtility::_GET('useGtm'))
             $config->setUseGtm((bool)!$config->getUseGtm());
 
-        $this->configRepository->update($config);
+        $this->configRepository->update(
+            UsercentricsConfigurationService::addConfiguration(
+                $config,
+                GeneralUtility::_POST(),
+                $this->request->getAttribute('site')->getRootpageId()
+            )
+        );
         $this->redirect('list');
     }
 

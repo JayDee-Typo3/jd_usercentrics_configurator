@@ -33,6 +33,9 @@ class UsercentricsConfigurationService
         if ($data['blockOnly'] && is_array($data['blockOnly']))
             $config->setBlockOnly("'" . implode("','", $data['blockOnly']) . "'");
 
+        if (empty($data['blockOnly']))
+            $config->setBlockOnly('');
+
         return $config;
     }
 
