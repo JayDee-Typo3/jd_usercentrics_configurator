@@ -37,51 +37,85 @@
 	<f:section name="GeneralTab">
 		<div class="container">
 			<div class="row">
-				<div class="col">
-					<label for="settingsId">
-						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /> <span class="required">*</span>
-					</label>
-					<f:form.textfield property="settingsId" id="settingsId" class="form-control"/>
+				<fieldset class="form-section">
+					<div class="form-group t3js-formengine-palette-field t3js-formengine-validation-marker">
+						<label for="settingsId">
+							<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.settings_id" /> <span class="required">*</span>
+						</label>
+						<f:form.textfield property="settingsId" id="settingsId" class="form-control"/>
+					</div>
+				</fieldset>
+			</div>
+			<div class="row"><div class="w-100">&nbsp;</div></div>
+			<div class="row justify-content-evenly">
+				<div class="card col-5">
+					<div class="card-body">
+						<h3 class="card-title"><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.activate" /></h3>
+						<p>Activate Usercentrics integration for selected Domain.</p>
+					</div>
+					<div class="card-footer">
+						<div class="form-check form-switch">
+							<f:form.checkbox property="activate" id="activate" value="1" class="form-check-input" />
+							<f:render section="ToggleStage" arguments="{toggle: config.activate}" />
+						</div>
+					</div>
+				</div>
+				<div class="card col-5">
+					<div class="card-body">
+						<h3 class="card-title"><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" /></h3>
+						<p>If you deactivate the Icon for your page than activate the footer link to get access to the consentmanager.</p>
+					</div>
+					<div class="card-footer">
+						<div class="form-check form-switch">
+							<f:form.checkbox property="useFooterLink" id="useFooterLink" value="1" class="form-check-input" />
+							<f:render section="ToggleStage" arguments="{toggle: config.useFooterLink}" />
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<label for="activate">
-						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.activate" />
-					</label>
-					<f:form.checkbox property="activate" id="activate" value="1" class="form-check-input" />
+			<div class="row"><div class="w-100">&nbsp;</div></div>
+			<div class="row justify-content-evenly">
+				<div class="card col-5">
+					<div class="card-body">
+						<h3 class="card-title"><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" /></h3>
+						<p>Activate the <b>Google Tag Manager</b> integration.</p>
+					</div>
+					<div class="card-footer">
+						<div class="form-check form-switch">
+							<f:form.checkbox property="useGtm" id="useGtm" value="1" class="form-check-input" />
+							<f:render section="ToggleStage" arguments="{toggle: config.useGtm}" />
+						</div>
+					</div>
 				</div>
-				<div class="col">
-					<label for="useFooterLink">
-						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_footer_link" />
-					</label>
-					<f:form.checkbox property="useFooterLink" id="useFooterLink" value="1" class="form-check-input" />
-				</div>
-				<div class="col">
-					<label for="useGtm">
-						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.use_gtm" />
-					</label>
-					<f:form.checkbox property="useGtm" id="useGtm" value="1" class="form-check-input" />
-				</div>
-				<div class="col">
-					<label for="gtmId">
-						<f:translate key="tx_jdusercentricsconfigurator_domain_model_config.gtm_id" />
-					</label>
-					<f:form.textfield property="gtmId" id="gtmId" class="form-control" />
+				<div class="card col-5">
+					<div class="card-body">
+						<h3 class="card-title"><f:translate key="tx_jdusercentricsconfigurator_domain_model_config.gtm_id" /></h3>
+						<p>
+							If you use <b>Google Tag Manager</b> enter here the ID for the integration<br />
+							And activate the integration.
+						</p>
+					</div>
+					<div class="card-footer">
+						<f:form.textfield property="gtmId" id="gtmId" class="form-control" />
+					</div>
 				</div>
 			</div>
 		</div>
 	</f:section>
 
 	<f:section name="BlockOnly">
-		<div class="row">
-			<p>Please select the Services which has to be watched by the Smart Dataprotector.</p>
-		</div>
+		<p>Please select the Services which has to be watched by the Smart Dataprotector.</p>
+		<div class="row"> <div class="w-100">&nbsp;</div></div>
 		<f:variable name="conf" value="{f:if(condition: newConfig, then: newConfig, else: config)}" />
 		<f:render partial="Usercentrics/ServiceSelection"
 							section="Main"
 							arguments="{ucServiceList: ucServiceList, fieldName: 'blockOnly', config: conf}" />
+	</f:section>
+
+	<f:section name="ToggleStage">
+		<f:if condition="{toggle}">
+			<f:then><f:translate key="be.module.edit.toggle.state.active" /></f:then>
+			<f:else><f:translate key="be.module.edit.toggle.state.disabled" /></f:else>
+		</f:if>
 	</f:section>
 </html>

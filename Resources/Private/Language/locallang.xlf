@@ -48,6 +48,12 @@
 			<trans-unit id="be.controller.general.status.inactive.lvl" resname="be.controller.general.status.inactive.lvl">
 				<source><![CDATA[Inactive]]></source>
 			</trans-unit>
+			<trans-unit id="be.module.edit.toggle.state.active" resname="be.module.edit.toggle.state.active">
+				<source><![CDATA[Active]]></source>
+			</trans-unit>
+			<trans-unit id="be.module.edit.toggle.state.disabled" resname="be.module.edit.toggle.state.disabled">
+				<source><![CDATA[Disabled]]></source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
